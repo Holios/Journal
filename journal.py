@@ -28,22 +28,33 @@ while(True):
 # to a searchable folder structure of year(folder) > month(subfolder) > entry(file)
 # entry will be listed by date and hour, if there is an entry within the last hour
 # todo: will ask the user to either rename, or overwrite
-        year_folder = "{datetime.datetime.now().strftime('%Y')}"
-        month_folder = "{datetime.datetime.now().strftime('%M')}"
-        time = datetime.datetime.now().strftime("%d-%m-%y-%h")
-        if os.path.isdir(f'./{datetime.datetime.now().strftime("%Y")}') == False:
-            mydir = os.path.join(os.getcwd(), datetime.datetime.now().strftime("%Y"))
-            os.makedirs(mydir)
-        if os.path.isdir(f'./{year_folder} + "\\" + {month_folder}') == False:
-            mydir2 = os.path.join(os.getcwd(), datetime.datetime.now().strftime("%Y") + "//" + datetime.datetime.now().strftime('%B'))
-            os.makedirs(mydir2)
-        if os.path.is
+
+        journal = ""
+        mydir = datetime.datetime.now().strftime('%Y')
+        mydir2 = datetime.datetime.now().strftime('%B')
+
+        if os.path.isdir(mydir) == False:
+            os.mkdir(mydir)
+
+        os.chdir(mydir)
+
+        if os.path.isdir(mydir2) == False:
+            os.mkdir(mydir2)
+
+        os.chdir(mydir2)
+
+        my_file_name = datetime.datetime.now().strftime("%B - %d")
+        my_file = open(my_file_name + '.txt', "w")
         print("Enter in \"x\" alone to exit.")
         while(True):
             newline = input(": ")
             if(newline=="x"):
                 break
             else: journal = journal + (newline + "\n")
+        my_file.write(journal)
+        my_file.close()
+
+        os.chdir("../..")
 
     if selection == "2":
         pass
