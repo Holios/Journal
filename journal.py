@@ -6,12 +6,6 @@ import datetime
 import time
 import os
 
-class Entry:
-    def __init__(self):
-        self.mood = ""
-        self.text = ""
-
-
 selection = ""
 
 while(True):
@@ -50,6 +44,8 @@ while(True):
         my_file_name = datetime.datetime.now().strftime("%B - %d")
         my_file = open(my_file_name + '.txt', "a")
 
+#asks the user for their current mood
+
         print("how are you feeling today? (Enter in \"x\" alone to exit.)")
         while (True):
             mood_new_line = input(": ")
@@ -58,6 +54,8 @@ while(True):
             else: mood = mood + (mood_new_line + "\n")
         mood_entry = (f"MOOD: {mood}  \n------------ \n \n")
         my_file.write(mood_entry)
+
+# asks the user for their journal entry for Today
 
         print("what is your journal entry for today? \n(Enter in \"x\" alone to exit.)")
         journal = ""
@@ -69,7 +67,11 @@ while(True):
         journal_entry = (f"Journal Entry for {datetime.datetime.now().strftime('%B-%d')} \n\n   {journal}")
         my_file.write(journal_entry)
 
+# prints into the file a small formatting piece
+
         my_file.write(questionnaire_format)
+
+# asks the user a series of questions and inputs the answers formatted into the journal file
 
         print("What was the best thing that happened today? \n(Enter in \"x\" alone to exit.)")
         journal = ""
@@ -80,6 +82,7 @@ while(True):
             else: journal = journal + (newline + "\n")
         journal_entry = (f"The best thing that happened today was: \n{journal}\n")
         my_file.write(journal_entry)
+
 
         print("Name one thing you did for someone else today. \n(Enter in \"x\" alone to exit.)")
         journal = ""
