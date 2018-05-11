@@ -10,7 +10,7 @@ selection = ""
 
 while(True):
     print ("1: Add a journal entry")
-    print ("4: exit program")
+    print ("2: exit program")
     selection = input(">")
 
     if selection == "1":
@@ -28,30 +28,34 @@ while(True):
         mood_entry = ""
         questionnaire_format = "\nSelf Questionnaire\n------------\n"
 
+# the program will create a folder structure for saving of files,
+# this is where we check for/create the needed year and month folders
+
         mydir = datetime.datetime.now().strftime('%Y')
         mydir2 = datetime.datetime.now().strftime('%B')
 
         if os.path.isdir(mydir) == False:
             os.mkdir(mydir)
-
         os.chdir(mydir)
 
         if os.path.isdir(mydir2) == False:
             os.mkdir(mydir2)
-
         os.chdir(mydir2)
+
+# creation of the container for the file in use
 
         my_file_name = datetime.datetime.now().strftime("%B - %d")
         my_file = open(my_file_name + '.txt', "a")
 
-#asks the user for their current mood
+# asks the user for their current mood
 
         print("how are you feeling today? (Enter in \"x\" alone to exit.)")
+        journal = ""
         while (True):
-            mood_new_line = input(": ")
-            if(mood_new_line == "x"):
+            newline = input(": ")
+            if( newline == "x"):
                 break
-            else: mood = mood + (mood_new_line + "\n")
+            else: journal + journal + (newline + "\n")
         mood_entry = (f"MOOD: {mood}  \n------------ \n \n")
         my_file.write(mood_entry)
 
@@ -79,7 +83,7 @@ while(True):
             newline = input(": ")
             if(newline =="x"):
                 break
-            else: journal = journal + (newline + "\n")
+            journal = journal + (newline + "\n")
         journal_entry = (f"The best thing that happened today was: \n{journal}\n")
         my_file.write(journal_entry)
 
@@ -113,9 +117,10 @@ while(True):
             else: journal = journal + (newline + "\n")
         journal_entry = (f"Today I:\n{journal}\n")
         my_file.write(journal_entry)
+
         my_file.close()
 
         os.chdir("../..")
 
-    if selection == "4":
+    if selection == "2":
         sys.exit()
