@@ -5,7 +5,7 @@ import sys
 import datetime
 import time
 import os
-
+import function
 selection = ""
 
 while(True):
@@ -49,74 +49,26 @@ while(True):
 
 # asks the user for their current mood
 
-        print("how are you feeling today? (Enter in \"x\" alone to exit.)")
-        journal = ""
-        while (True):
-            newline = input(": ")
-            if( newline == "x"):
-                break
-            else: journal + journal + (newline + "\n")
-        mood_entry = (f"MOOD: {mood}  \n------------ \n \n")
-        my_file.write(mood_entry)
+        function.entry("how are you feeling today? (enter in \"x\" alone to exist.)",f"MOOD: {journal}  \n------------ \n \n")
+
 
 # asks the user for their journal entry for Today
+        function.entry("what is your journal entry for today? \n(Enter in \"x\" alone to exit.)",f"Journal Entry for {datetime.datetime.now().strftime('%B-%d')} \n\n   {journal}")
 
-        print("what is your journal entry for today? \n(Enter in \"x\" alone to exit.)")
-        journal = ""
-        while(True):
-            newline = input(": ")
-            if(newline=="x"):
-                break
-            else: journal = journal + (newline + "\n")
-        journal_entry = (f"Journal Entry for {datetime.datetime.now().strftime('%B-%d')} \n\n   {journal}")
-        my_file.write(journal_entry)
 
 # prints into the file a small formatting piece
 
         my_file.write(questionnaire_format)
 
 # asks the user a series of questions and inputs the answers formatted into the journal file
-
-        print("What was the best thing that happened today? \n(Enter in \"x\" alone to exit.)")
-        journal = ""
-        while(True):
-            newline = input(": ")
-            if(newline =="x"):
-                break
-            journal = journal + (newline + "\n")
-        journal_entry = (f"The best thing that happened today was: \n{journal}\n")
-        my_file.write(journal_entry)
+        function.entry("What was the best thing that happened today? \n(Enter in \"x\" alone to exit.)",f"The best thing that happened today was: \n{journal}\n")
 
 
-        print("Name one thing you did for someone else today. \n(Enter in \"x\" alone to exit.)")
-        journal = ""
-        while(True):
-            newline = input(": ")
-            if(newline=="x"):
-                break
-            else: journal = journal + (newline + "\n")
-        journal_entry = (f"Today I helped someone else by:\n{journal}\n")
-        my_file.write(journal_entry)
+        function.entry("Name one thing you did for someone else today. \n(Enter in \"x\" alone to exit.)",f"Today I helped someone else by:\n{journal}\n")
 
-        print("Name one thing you did for yourself today: \n(Enter in \"x\" alone to exit.)")
-        journal = ""
-        while(True):
-            newline = input(": ")
-            if(newline=="x"):
-                break
-            else: journal = journal + (newline + "\n")
-        journal_entry = (f"Today I helped myself by:\n{journal}\n")
-        my_file.write(journal_entry)
+        function.entry("Name one thing you did for yourself today: \n(Enter in \"x\" alone to exit.)",f"Today I helped myself by:\n{journal}\n")
 
-        print("Name one thing you learned or accomplished today: \n(Enter in \"x\" alone to exit.)")
-        journal = ""
-        while(True):
-            newline = input(": ")
-            if(newline=="x"):
-                break
-            else: journal = journal + (newline + "\n")
-        journal_entry = (f"Today I:\n{journal}\n")
-        my_file.write(journal_entry)
+        function.entry("Name one thing you learned or accomplished today: \n(Enter in \"x\" alone to exit.)",f"Today I:\n{journal}\n")
 
         my_file.close()
 
