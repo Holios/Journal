@@ -7,6 +7,8 @@ import time
 import os
 import function
 selection = ""
+#--------------------------------------
+#main loop
 
 while(True):
     print ("1: Add a journal entry")
@@ -14,19 +16,8 @@ while(True):
     selection = input(">")
 
     if selection == "1":
-# will create a local folder for year, and sub folders for months, will auto
-# create new monthly folders and will create a file with input from the user
-# will use the datetime year and datetime month to ensure it is saving entries
-# to a searchable folder structure of year(folder) > month(subfolder) > entry(file)
-# entry will be listed by date and hour, if there is an entry within the last hour
-# todo: will ask the user to either rename, or overwrite
 
-
-        journal = ""
-        journal_entry = ""
-        mood = ""
-        mood_entry = ""
-        questionnaire_format = "\nSelf Questionnaire\n------------\n"
+    questionnaire_format = "\nSelf Questionnaire\n------------\n"
 
 # the program will create a folder structure for saving of files,
 # this is where we check for/create the needed year and month folders
@@ -47,32 +38,26 @@ while(True):
         my_file_name = datetime.datetime.now().strftime("%B - %d")
         my_file = open(my_file_name + '.txt', "a")
 
-# asks the user for their current mood
+# asks the user for their current mood and a journal entry
 
-        function.entry("how are you feeling today? (enter in \"x\" alone to exist.)",f"MOOD: {journal}  \n------------ \n \n")
-
-
-# asks the user for their journal entry for Today
-        function.entry("what is your journal entry for today? \n(Enter in \"x\" alone to exit.)",f"Journal Entry for {datetime.datetime.now().strftime('%B-%d')} \n\n   {journal}")
-
+        function.entry("how are you feeling today? (enter in \"x\" alone to exist.)","MOOD: {}  \n------------ \n \n")
+        function.entry("what is your journal entry for today? \n(Enter in \"x\" alone to exit.)",f"Journal Entry for {datetime.datetime.now().strftime('%B-%d')}" + " \n\n   {}")
 
 # prints into the file a small formatting piece
 
         my_file.write(questionnaire_format)
 
 # asks the user a series of questions and inputs the answers formatted into the journal file
-        function.entry("What was the best thing that happened today? \n(Enter in \"x\" alone to exit.)",f"The best thing that happened today was: \n{journal}\n")
+        function.entry("What was the best thing that happened today? \n(Enter in \"x\" alone to exit.)","The best thing that happened today was: \n{}\n")
+        function.entry("Name one thing you did for someone else today. \n(Enter in \"x\" alone to exit.)","Today I helped someone else by:\n{}\n")
+        function.entry("Name one thing you did for yourself today: \n(Enter in \"x\" alone to exit.)","Today I helped myself by:\n{}\n")
+        function.entry("Name one thing you learned or accomplished today: \n(Enter in \"x\" alone to exit.)","Today I:\n{}\n")
 
-
-        function.entry("Name one thing you did for someone else today. \n(Enter in \"x\" alone to exit.)",f"Today I helped someone else by:\n{journal}\n")
-
-        function.entry("Name one thing you did for yourself today: \n(Enter in \"x\" alone to exit.)",f"Today I helped myself by:\n{journal}\n")
-
-        function.entry("Name one thing you learned or accomplished today: \n(Enter in \"x\" alone to exit.)",f"Today I:\n{journal}\n")
-
+# closes the file that has been used  and resets the active directory
         my_file.close()
 
         os.chdir("../..")
 
+# closes the program when "2" is selected
     if selection == "2":
         sys.exit()
